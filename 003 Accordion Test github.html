@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SOSS Email Builder Beta1</title>
+ 
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+	  
+	  
+	  $(document).ready(function() {
+		  //Clones the Main feature code, adds it to the bottom of the Accordion and changes display to "Show"
+		  $("#btn1").click(function() {
+				$(".main_feature").first().clone(true, true).appendTo("#accordion").show();
+			  	 });
+		  //Clones the Sub-Feature code, adds it to the bottom of the Accordion and changes display to "Show"
+		   $("#btn2").click(function() {
+				$(".sub_feature").first().clone(true, true).appendTo("#accordion").show();
+			  	 });
+		  //Clones the Banner code, adds it to the bottom of the Accordion and changes display to "Show"
+		  $("#btn3").click(function() {
+				$(".banner").first().clone(true, true).appendTo("#accordion").show();
+			  	 });
+	 
+
+	  });
+	  
+	  //Allows the accordion body to collapse into the "h3" tags
+  $( function() {
+    $( "#accordion" ).accordion({
+      collapsible: true,
+        active: false,
+        heightStyle: 'auto',
+        header: 'h3'
+    }).sortable({
+        items: '.s_panel',
+    });
+	
+  } );
+	  
+	  //Allows "X" button to remove the indivual accordion element
+	 $(function(){
+		 $(".remove-btn").click(function(){
+			 $(this).parent().remove();
+		 });
+	 });
+
+
+  </script>
+  
+</head>
+<body>
+	
+<!--Preheader Input-->
+	<h4>Preheader Text</h4>
+	<textarea style="width:50%" placeholder="Insert Preheader Here"></textarea><br><br>
+	
+<!-- Buttons for inserting code accordions -->
+	
+ <button id="btn1">Insert Main Feature</button>
+	<button id="btn2">Insert Sub-Feature</button>
+	<button id="btn3">Insert Banner</button>
+	
+<!--Tracking Code Text Box-->
+	
+	<form style="display: inline-block; padding-left:50px" action="" method="get" class="tracking_code">
+		<label for="tracking_code">Tracking code: </label>
+		<input type="text" name="tracking_code" id="tracking_code" required>
+	 </form>
+	<br><br>
+<!--Start of Accordion Block-->
+	
+<div id="accordion" style="background-color:#DCDCDC; padding: 10px 5px; max-width: 640px">
+	
+<!--Main Feature Accordion-->
+	
+	<div style="display: none" class="s_panel main_feature">
+		<button class="remove-btn" style="float: right; margin-top: 10px; margin-right:5px">X</button>
+  		<h3 id="accordion-head" style="background-color: lightgoldenrodyellow; padding: 10px;">Main Feature</h3>
+  			<div id="accordion-body" style="padding: 20px 0px;background-color:cadetblue">
+			
+<!--Main Feature Form-->
+			
+    		<div class="form-input">
+				<form action="" method="get" class="form-example">
+				  <div class="form-example">
+					<label for="style">Style: </label>
+					<input type="text" name="main_style" id="main_style" required>
+				  </div>
+				  <div class="form-example">
+					<label for="link">Image Link: </label>
+					<input type="text" name="main_img_link" id="main_img_link" required>
+				  </div>
+				  <div class="form-example">
+					<label for="link">Web Link: </label>
+					<input type="text" name="main_web_link" id="main_web_link" required>
+				  </div>
+					<div class="form-example">
+					<label for="price">Price: </label>
+					<input type="text" name="main_price" id="main_price" required>
+				  </div>
+					<div class="form-example">
+					<label for="description">Description: </label>
+					<input type="text" name="main_description" id="main_description" required>
+				  </div>
+				</form>
+ 			</div>
+  		</div>
+	</div>
+	
+<!--Sub-Feature Accordion-->
+	
+	<div  style=" display: none" class="s_panel sub_feature">
+		<button class="remove-btn" style="float: right; margin-top: 10px; margin-right:5px">X</button>
+  		<h3 style="background-color: lightgoldenrodyellow; padding: 10px;">Sub Features</h3>
+  			<div style="background-color:cadetblue;padding: 20px 0px"><br>
+	  
+<!--Sub Feature 1 Form-->
+    <div class="form-input" style="float:right;">
+    <form action="" method="get" class="form-example">
+      <div class="form-example">
+        <label for="style">Style: </label>
+        <input type="text" name="sub_style1" id="sub_style1" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Image Link: </label>
+        <input type="text" name="sub_img_link1" id="sub_img_link1" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Web Link: </label>
+        <input type="text" name="sub_web_link1" id="sub_web_link1" required>
+      </div>
+		<div class="form-example">
+		  <label for="price">Price: </label>
+		  <input type="text" name="sub_price1" id="sub_price1" required>
+		</div>
+	  </form>
+  </div>
+				
+<!--Sub Feature 2 Form-->
+				
+  <div class="form-input" style="float:left;">
+    <form action="" method="get" class="form-example">
+      <div class="form-example">
+        <label for="style">Style: </label>
+        <input type="text" name="sub_style2" id="sub_style2" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Image Link: </label>
+        <input type="text" name="sub_img_link2" id="sub_img_link2" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Web Link: </label>
+        <input type="text" name="sub_web_link2" id="sub_web_link2" required>
+      </div>
+		<div class="form-example">
+		  <label for="price">Price: </label>
+		  <input type="text" name="sub_price2" id="sub_price2" required>
+		</div>
+	  </form>
+  </div><br><br>
+  </div>
+</div>
+	
+<!--Banner Accordion-->
+	
+	<div style="display: none" class="s_panel banner">
+		<button class="remove-btn" style="float: right; margin-top: 10px; margin-right:5px">X</button>
+  <h3 style="background-color: lightgoldenrodyellow; padding: 10px;">Banner</h3>
+  <div style="background-color:cadetblue;padding: 20px 0px">
+	  
+    <!--Banner Form-->
+	  
+    <div class="form-input">
+    <form action="" method="get" class="form-example">
+      <div class="form-example">
+        <label for="style">Style: </label>
+        <input type="text" name="banner_style" id="banner_style" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Image Link: </label>
+        <input type="text" name="banner_img_link" id="banner_img_link" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Web Link: </label>
+        <input type="text" name="banner_web_link" id="banner_web_link" required>
+      </div>
+		<div class="form-example">
+		  <label for="price">Price: </label>
+		  <input type="text" name="banner_price" id="banner_price" required>
+		</div>
+	  </form>
+  </div>
+  </div>
+	</div>
+	
+<!--Temporary Section 4-->
+	
+	<div class="s_panel">
+		<button class="remove-btn" style="float: right; margin-top: 10px; margin-right:5px">X</button>
+  <h3 style="background-color: lightgoldenrodyellow; padding: 10px;">Section 4</h3>
+  <div style="background-color:cadetblue;margin-top:-20px">
+    <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+  </div>
+	</div>
+</div>
+	
+<!--End of Accordion-->
+ 
+ 
+</body>
+</html>
