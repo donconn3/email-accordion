@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SOSS Email Builder Alpha</title>
+ 
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+	
+	  
+	  $(document).ready(function() {
+		  //Clones the Main feature code, adds it to the bottom of the Accordion and changes display to "Show"
+		  $("#btn1").click(function() {
+				$(".main_feature").first().clone(true, true).appendTo("#accordion").show();
+			  	 });
+		  //Clones the Sub-Feature code, adds it to the bottom of the Accordion and changes display to "Show"
+		   $("#btn2").click(function() {
+				$(".sub_feature").first().clone(true, true).appendTo("#accordion").show();
+			  	 });
+		  //Clones the Banner code, adds it to the bottom of the Accordion and changes display to "Show"
+		  $("#btn3").click(function() {
+				$(".banner").first().clone(true, true).appendTo("#accordion").show();
+			  	 });
+		   $("#btn4").click(function() {
+			   var numForms = document.forms.length;
+			   //var style = main_style.elements[0]
+			 for(var i = 6; i < numForms; i++){
+				 if(document.forms[i].id == "main"){
+					var style = document.forms[i].elements[0];
+					var imgLink = document.forms[i].elements[1];
+					var webLink = document.forms[i].elements[2];
+					var price = document.forms[i].elements[3];
+					var description = document.forms[i].elements[4];
+					var mainBlock =`<pre><code><xmp><!-- Start Main Feature-->
+                              
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-top: 5px">
+                                   <tr>
+                                        <td class="fluid-img" style="font-size: 12px; border: 1px solid #e1e1e1; background-color: #f5f5f5; padding-top: 10px">
+                                             <a href="https://www.sportsmansoutdoorsuperstore.com/black-friday.cfm/sale/semi-automatic-shotguns-for-sale/brand/CITADEL?utm_source=101922&utm_medium=email&utm_campaign=101922">
+                                             <!-- Main Feature Image - Transparent PNG -->
+                                             <img src="https://files.constantcontact.com/8a509b6a801/2075d9f4-c651-43a4-b183-e2f0a2ee000a.png" width="100%" border="0" alt="$(style)" />
+                                             </a>
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td class="mobileEmailText" style="font-size:21px; line-height:26px; text-align:center; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 5px; font-family:'Roboto', Arial, sans-serif; font-size: 21px; background-color: #f5f5f5; border-right: 1px solid #e1e1e1; border-left: 1px solid #e1e1e1; color: #222222;">
+                                             <a href="https://www.sportsmansoutdoorsuperstore.com/black-friday.cfm/sale/semi-automatic-shotguns-for-sale/brand/CITADEL?utm_source=101922&utm_medium=email&utm_campaign=101922" style="font-size:21px; line-height:24px; text-align:center; font-family:'Roboto', Arial, sans-serif;  color: #333333;">
+                                             <strong>Citadel Boss-25 12 Gauge
+												 <br>AR-Style Shotguns</strong>
+                                             <br>
+                                             <span style="color: #a94442;">
+												 Starting at <strong>$329.99</strong></span>
+                                             <br>
+                                             </a>
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td class="mobileEmailParagraph" style="font-size:16px; line-height:21px; text-align:center; padding-top: 15px; padding-bottom: 10px; padding-left: 25px; padding-right: 25px; font-family:'Roboto', Arial, sans-serif; background-color: #f5f5f5; border-right: 1px solid #e1e1e1; border-left: 1px solid #e1e1e1; color: #222222;">
+                                             
+The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versatile shotgun that is capable of home defense, recreational, as well as competition use. The BOSS-25 is built from the ground up to be a user-friendly, hard use shotgun that will perform under the harshest conditions.
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td style="padding-top:15px; padding-bottom: 30px; border-left: 1px solid #e1e1e1; border-right: 1px solid #e1e1e1; border-bottom: 1px solid #e1e1e1; background-color: #f5f5f5;">
+                                             <table align="center" border="0" cellpadding="0" cellspacing="0" class="emailButton" style="border-radius:3px; background-color:#cc101a;">
+                                                  <tr>
+                                                       <td align="center" valign="middle" class="emailButtonContent" style="padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">
+                                                            <a href="https://www.sportsmansoutdoorsuperstore.com/black-friday.cfm/sale/semi-automatic-shotguns-for-sale/brand/CITADEL?utm_source=101922&utm_medium=email&utm_campaign=101922" target="_blank" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; text-decoration:none; line-height: 18px; text-transform: uppercase;">
+                                                            Shop now
+                                                            </a>
+                                                       </td>
+                                                  </tr>
+                                             </table>
+                                        </td>
+                                   </tr>
+                              </table>
+                              <!-- End Main Feature --></xmp></code></pre>`;
+			   $(".text").append(mainBlock);
+			 
+		   };
+		   };
+		   };
+		)};
+	  //Allows the accordion body to collapse into the "h3" tags
+  $( function() {
+    $( "#accordion" ).accordion({
+      collapsible: true,
+        active: false,
+        heightStyle: 'content',
+        header: 'h3'
+    }).sortable({
+        items: '.s_panel',
+    });
+	
+  } );
+	  
+	  //Allows "X" button to remove the indivual accordion element
+	 $(function(){
+		 $(".remove-btn").click(function(){
+			 $(this).parent().remove();
+		 });
+	 });
+	 
+	  
+  </script>
+  
+</head>
+<body>
+	
+<!--Preheader Input-->
+	<h4>Preheader Text</h4>
+	<textarea id="preheader-text" style="width:38%" placeholder="Insert Preheader Here">Example Text</textarea><br><br>
+	
+<!-- Buttons for inserting code accordions -->
+	
+ <button id="btn1">Insert Main Feature</button>
+	<button id="btn2">Insert Sub-Feature</button>
+	<button id="btn3">Insert Banner</button>
+	
+<!--Tracking Code Text Box-->
+	
+	<form style="display: inline-block; padding-left:10px" action="" method="get" class="tracking_code">
+		<label for="tracking_code">Tracking code: </label>
+		<input type="text" name="tracking_code" id="tracking_code" required>
+	 </form>
+	<br><br>
+<!--Start of Accordion Block-->
+	
+<div id="accordion" style="display: inline-block; background-color:#DCDCDC; padding: 10px 5px; min-width: 640px">
+	
+<!--Main Feature Accordion-->
+	
+	<div style="display: none" class="s_panel main_feature">
+		<button class="remove-btn" style="float: right; margin-top: 10px; margin-right:5px">X</button>
+  		<h3  style="background-color: lightgoldenrodyellow; padding: 10px;">Main Feature</h3>
+  			<div  style="padding: 20px 0px;background-color:cadetblue">
+			
+<!--Main Feature Form-->
+			
+    		<div class="form-input">
+				<form action="" method="get" class="main">
+				  <div class="form-example main_style">
+					<label for="style">Style: </label>
+					<input type="text" name="main_style" id="main_style" required/>
+				  </div>
+				  <div class="form-example">
+					<label for="link">Image Link: </label>
+					<input type="text" name="main_img_link" id="main_img_link" required/>
+				  </div>
+				  <div class="form-example">
+					<label for="link">Web Link: </label>
+					<input type="text" name="main_web_link" id="main_web_link" required>
+				  </div>
+					<div class="form-example">
+					<label for="price">Price: </label>
+					<input type="text" name="main_price" id="main_price" required>
+				  </div>
+					<div class="form-example">
+					<label for="description">Description: </label>
+					<input type="text" name="main_description" id="main_description" required>
+				  </div>
+				</form>
+ 			</div>
+				
+  		</div>
+	</div>
+	
+	
+<!--Sub-Feature Accordion-->
+	
+	<div  style="display: none" class="s_panel sub_feature ">
+		<button class="remove-btn" style="float: right; margin-top: 10px; margin-right:5px">X</button>
+  		<h3 style="background-color: lightgoldenrodyellow; padding: 10px;">Sub Features</h3>
+  			<div style="background-color:cadetblue; padding-bottom: 20px"><br>
+	  
+<!--Sub Feature 1 Form-->
+    <div class="form-input ui-accordion-content" style="display:inline-block;">
+    <form action="" method="get" class="sub1">
+      <div class="form-example">
+        <label for="style">Style: </label>
+        <input type="text" name="sub_style1" id="sub_style1" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Image Link: </label>
+        <input type="text" name="sub_img_link1" id="sub_img_link1" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Web Link: </label>
+        <input type="text" name="sub_web_link1" id="sub_web_link1" required>
+      </div>
+		<div class="form-example">
+		  <label for="price">Price: </label>
+		  <input type="text" name="sub_price1" id="sub_price1" required>
+		</div>
+	  </form>
+  </div>
+				
+<!--Sub Feature 2 Form -->
+				
+  <div class="form-input ui-accordion-animate" style="display: inline-block; padding-left: 20px;">
+    <form action="" method="get" class="sub2" >
+      <div class="form-example">
+        <label for="style">Style: </label>
+        <input type="text" name="sub_style2" id="sub_style2" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Image Link: </label>
+        <input type="text" name="sub_img_link2" id="sub_img_link2" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Web Link: </label>
+        <input type="text" name="sub_web_link2" id="sub_web_link2" required>
+      </div>
+		<div class="form-example">
+		  <label for="price">Price: </label>
+		  <input type="text" name="sub_price2" id="sub_price2" required>
+		</div>
+	  </form>
+  </div>
+  </div>
+</div>
+
+	
+<!--Banner Accordion-->
+	
+	<div style="display: none" class="s_panel banner">
+		<button class="remove-btn" style="float: right; margin-top: 10px; margin-right:5px">X</button>
+  <h3 style="background-color: lightgoldenrodyellow; padding: 10px;">Banner</h3>
+  <div style="background-color:cadetblue;padding: 20px 0px">
+	  
+    <!--Banner Form-->
+	  
+    <div class="form-input">
+    <form action="" method="get" class="banner">
+      <div class="form-example">
+        <label for="style">Style: </label>
+        <input type="text" name="banner_style" id="banner_style" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Image Link: </label>
+        <input type="text" name="banner_img_link" id="banner_img_link" required>
+      </div>
+      <div class="form-example">
+        <label for="link">Web Link: </label>
+        <input type="text" name="banner_web_link" id="banner_web_link" required>
+      </div>
+		<div class="form-example">
+		  <label for="price">Price: </label>
+		  <input type="text" name="banner_price" id="banner_price" required>
+		</div>
+	  </form>
+  </div>
+  </div>
+	</div>
+	
+<!--Temporary Section 4-->
+	
+	<div class="s_panel">
+		<button class="remove-btn" style="float: right; margin-top: 10px; margin-right:5px">X</button>
+  <h3 style="background-color: lightgoldenrodyellow; padding: 10px;">Section 4</h3>
+  <div style="background-color:cadetblue;margin-top:-20px">
+    <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+  </div>
+	</div>
+	
+</div>
+	<button id="btn4">Compile</button>
+	
+<!--End of Accordion-->
+
+<!-- HTML Output -->
+	
+	<div id="form-output" style="display: inline-block; float: right; min-width: 50%; min-height: 200px;  border-color: black; border: 2px solid black; background-color:#E4DFDF; margin-right: 30px">
+		
+		
+		<p class="text"></p>
+	</div> 
+ 
+</body>
+</html>
