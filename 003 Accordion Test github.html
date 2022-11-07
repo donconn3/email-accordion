@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SOSS Email Builder Beta1</title>
+  <title>SOSS Email Builder Alpha</title>
  
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  <script>
+  <script type="text/javascript">
 	
 	  
 	  $(document).ready(function() {
@@ -23,9 +23,17 @@
 		  $("#btn3").click(function() {
 				$(".banner").first().clone(true, true).appendTo("#accordion").show();
 			  	 });
-		   $("#btn4").click(function() {
-		
-			   		var mainBlock =`<pre><code><xmp><!-- Start Main Feature-->
+		  $("#btn4").click(function() {
+			   var numForms = document.forms.length;
+			   //var style = main_style.elements[0]
+			 for(var i = 5; i < numForms; i++){
+				 if(document.forms[i].id == "main"){
+					var style = document.forms[i].elements[0].value;
+					var imgLink = document.forms[i].elements[1].value;
+					var webLink = document.forms[i].elements[2].value;
+					var price = document.forms[i].elements[3].value;
+					var description = document.forms[i].elements[4].value;
+					var mainBlock = `<pre><code><xmp><!-- Start Main Feature-->
                               
                               <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-top: 5px">
                                    <tr>
@@ -69,9 +77,13 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
                                    </tr>
                               </table>
                               <!-- End Main Feature --></xmp></code></pre>`;
-			   		$(".text").append(mainBlock);
-			    });
+				 
+			   $(".text").append(mainBlock);
+			 
+		   };
+		   };
 		   });
+	  });
 	  //Allows the accordion body to collapse into the "h3" tags
   $( function() {
     $( "#accordion" ).accordion({
@@ -92,9 +104,8 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 		 });
 	 });
 	 
-	  
-  </script>
-  
+</script>
+	
 </head>
 <body>
 	
@@ -129,8 +140,8 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 <!--Main Feature Form-->
 			
     		<div class="form-input">
-				<form action="" method="get" class="form-example">
-				  <div class="form-example">
+				<form action="" method="get" id="main">
+				  <div class="form-example main_style">
 					<label for="style">Style: </label>
 					<input type="text" name="main_style" id="main_style" required/>
 				  </div>
@@ -166,7 +177,7 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 	  
 <!--Sub Feature 1 Form-->
     <div class="form-input ui-accordion-content" style="display:inline-block;">
-    <form action="" method="get" class="form-example">
+    <form action="" method="get" class="sub1">
       <div class="form-example">
         <label for="style">Style: </label>
         <input type="text" name="sub_style1" id="sub_style1" required>
@@ -189,7 +200,7 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 <!--Sub Feature 2 Form -->
 				
   <div class="form-input ui-accordion-animate" style="display: inline-block; padding-left: 20px;">
-    <form action="" method="get" class="form-example" >
+    <form action="" method="get" class="sub2" >
       <div class="form-example">
         <label for="style">Style: </label>
         <input type="text" name="sub_style2" id="sub_style2" required>
@@ -222,7 +233,7 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
     <!--Banner Form-->
 	  
     <div class="form-input">
-    <form action="" method="get" class="form-example">
+    <form action="" method="get" class="banner">
       <div class="form-example">
         <label for="style">Style: </label>
         <input type="text" name="banner_style" id="banner_style" required>
@@ -261,10 +272,11 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 
 <!-- HTML Output -->
 	
-	<div id="form-output" style="display: inline-block; float: right; width: 50%; height: 200px;  border-color: black; border: 2px solid black; background-color:#E4DFDF; margin-right: 30px; ">
-		<p class ="text"></p>
+	<div id="form-output" style="display: inline-block; float: right; width: 50%; min-height: 200px;  border-color: black; border: 2px solid black; background-color:#E4DFDF; margin-right: 30px">
 		
-
+		
+		<p class="text"></p>
 	</div> 
+ 
 </body>
 </html>
