@@ -1,13 +1,15 @@
-110722 -- Text Wrap <pre> tags (Not Tested):
+110722 -- Text Wrap <pre> tags (Tested and Passed 110822):
 //https://css-tricks.com/snippets/css/make-pre-text-wrap/
 
-pre {
+xmp {
  white-space: pre-wrap;       /* css-3 */
  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
  white-space: -pre-wrap;      /* Opera 4-6 */
  white-space: -o-pre-wrap;    /* Opera 7 */
  word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+
+*changed it from pre to xmp and it worked
 ----------------------------------------------------------------------------------------------------------------------------------
 110722 -- Empty element by id and append new content (Not Tested):
 //https://stackoverflow.com/questions/2818614/jquery-insert-element-and-overwrite
