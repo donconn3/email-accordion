@@ -17,4 +17,6 @@ pre {
 $("<pre>").empty().append(mainBlock);
 //or..
 $("#text").html('').append(mainBlock);
+
+//more info about .empty()  https://api.jquery.com/empty/
 ---------------------------------------------------------------------------------------------------------------------------------
