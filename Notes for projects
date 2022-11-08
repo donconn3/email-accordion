@@ -11,7 +11,7 @@ xmp {
 
 *changed it from pre to xmp and it worked
 ----------------------------------------------------------------------------------------------------------------------------------
-110722 -- Empty element by id and append new content (Not Tested):
+110722 -- Empty element by id and append new content (Tested and Passed 110822):
 //https://stackoverflow.com/questions/2818614/jquery-insert-element-and-overwrite
 //"You can do this using .empty() or your current .html() with .append(), it's chained but not that much of an improvement:"
 //adjusted for my code below
