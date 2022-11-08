@@ -1,0 +1,20 @@
+110722 -- Text Wrap <pre> tags (Not Tested):
+//https://css-tricks.com/snippets/css/make-pre-text-wrap/
+
+pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+----------------------------------------------------------------------------------------------------------------------------------
+110722 -- Empty element by id and append new content (Not Tested):
+//https://stackoverflow.com/questions/2818614/jquery-insert-element-and-overwrite
+//"You can do this using .empty() or your current .html() with .append(), it's chained but not that much of an improvement:"
+//adjusted for my code below
+
+$("<pre>").empty().append(mainBlock);
+//or..
+$("#text").html('').append(mainBlock);
+---------------------------------------------------------------------------------------------------------------------------------
