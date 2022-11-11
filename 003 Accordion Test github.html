@@ -4,11 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SOSS Email Builder Alpha</title>
- 
+
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="/path/to/jquery.min.js"></script>
+  <script src="/path/to/savestorage.js"></script>
+		<style>
+	xmp {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+}
+	</style>
   <script type="text/javascript">
-	
 	  
 	  $(document).ready(function() {
 		  //Clones the Main feature code, adds it to the bottom of the Accordion and changes display to "Show"
@@ -24,65 +35,700 @@
 				$(".banner").first().clone(true, true).appendTo("#accordion").show();
 			  	 });
 		  $("#btn4").click(function() {
-			   var numForms = document.forms.length;
-			   //var style = main_style.elements[0]
-			 for(var i = 5; i < numForms; i++){
-				 if(document.forms[i].id == "main"){
-					var style = document.forms[i].elements[0].value;
-					var imgLink = document.forms[i].elements[1].value;
-					var webLink = document.forms[i].elements[2].value;
-					var price = document.forms[i].elements[3].value;
-					var description = document.forms[i].elements[4].value;
-					var mainBlock = `<pre><code><xmp><!-- Start Main Feature-->
-                              
-                              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-top: 5px">
+			  var numForms = document.forms.length;
+			  var trackingCode = document.getElementById("tracking_code").value;
+			  var preheader_input = document.getElementById("preheader_text").value;
+			  var preheader = splitString(preheader_input);
+			  function splitString(preheader_input){
+				  let arr = preheader_input.split(" ");
+				  let newString ="";
+				  arr.forEach((item) =>{
+					  if(item.includes("&")){
+						  //item.replace("&", "&amp;");
+						  newString += item.replace("&", "&amp;") + " ";
+					  }else{
+						  newString += item + " ";
+					  }
+				  })
+				  return newString;
+			  };
+              var footer = `<!-- Footer -->
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#333333">
                                    <tr>
-                                        <td class="fluid-img" style="font-size: 12px; border: 1px solid #e1e1e1; background-color: #f5f5f5; padding-top: 10px">
-                                             <a href="https://www.sportsmansoutdoorsuperstore.com/black-friday.cfm/sale/semi-automatic-shotguns-for-sale/brand/CITADEL?utm_source=101922&utm_medium=email&utm_campaign=101922">
-                                             <!-- Main Feature Image - Transparent PNG -->
-                                             <img src="https://files.constantcontact.com/8a509b6a801/2075d9f4-c651-43a4-b183-e2f0a2ee000a.png" width="100%" border="0" alt="${style}" />
-                                             </a>
-                                        </td>
-                                   </tr>
-                                   <tr>
-                                        <td class="mobileEmailText" style="font-size:21px; line-height:26px; text-align:center; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 5px; font-family:'Roboto', Arial, sans-serif; font-size: 21px; background-color: #f5f5f5; border-right: 1px solid #e1e1e1; border-left: 1px solid #e1e1e1; color: #222222;">
-                                             <a href="https://www.sportsmansoutdoorsuperstore.com/black-friday.cfm/sale/semi-automatic-shotguns-for-sale/brand/CITADEL?utm_source=101922&utm_medium=email&utm_campaign=101922" style="font-size:21px; line-height:24px; text-align:center; font-family:'Roboto', Arial, sans-serif;  color: #333333;">
-                                             <strong>Citadel Boss-25 12 Gauge
-												 <br>AR-Style Shotguns</strong>
-                                             <br>
-                                             <span style="color: #a94442;">
-												 Starting at <strong>$329.99</strong></span>
-                                             <br>
-                                             </a>
-                                        </td>
-                                   </tr>
-                                   <tr>
-                                        <td class="mobileEmailParagraph" style="font-size:16px; line-height:21px; text-align:center; padding-top: 15px; padding-bottom: 10px; padding-left: 25px; padding-right: 25px; font-family:'Roboto', Arial, sans-serif; background-color: #f5f5f5; border-right: 1px solid #e1e1e1; border-left: 1px solid #e1e1e1; color: #222222;">
-                                             
-The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versatile shotgun that is capable of home defense, recreational, as well as competition use. The BOSS-25 is built from the ground up to be a user-friendly, hard use shotgun that will perform under the harshest conditions.
-                                        </td>
-                                   </tr>
-                                   <tr>
-                                        <td style="padding-top:15px; padding-bottom: 30px; border-left: 1px solid #e1e1e1; border-right: 1px solid #e1e1e1; border-bottom: 1px solid #e1e1e1; background-color: #f5f5f5;">
-                                             <table align="center" border="0" cellpadding="0" cellspacing="0" class="emailButton" style="border-radius:3px; background-color:#cc101a;">
+                                        <td class="p30-15-0" bgcolor="#333333" style="padding: 40px 30px 0px 30px; font-weight: 400 !important; border-right: 1px solid #f2f2f2; border-left: 1px solid #f2f2f2;">
+                                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                   <tr>
-                                                       <td align="center" valign="middle" class="emailButtonContent" style="padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">
-                                                            <a href="https://www.sportsmansoutdoorsuperstore.com/black-friday.cfm/sale/semi-automatic-shotguns-for-sale/brand/CITADEL?utm_source=101922&utm_medium=email&utm_campaign=101922" target="_blank" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; text-decoration:none; line-height: 18px; text-transform: uppercase;">
-                                                            Shop now
-                                                            </a>
+                                                       <td class="m-padder2 pb30" align="center" style="padding-bottom:30px;">
+                                                            <table class="center" border="0" cellspacing="0" cellpadding="0" style="text-align:center;">
+                                                                 <tr>
+                                                                      <td class="img" width="40" style="font-size:12px; text-align:left;">
+                                                                           <a href="https://www.facebook.com/SportsmansOutdoorSuperstore" target="_blank">
+                                                                           <img src="https://files.constantcontact.com/7cc179c3301/b2215575-2d9b-43b5-ac7c-6f0623277c8e.png?rdr=true" width="26" height="26" border="0" alt="Sportsman's Outdoor Superstore Facebook" />
+                                                                           </a>
+                                                                      </td>
+                                                                      <td class="img" width="40" style="font-size:12px; text-align:left;">
+                                                                           <a href="https://twitter.com/sossdirect" target="_blank">
+                                                                           <img src="https://files.constantcontact.com/7cc179c3301/b365b79e-9048-4d8e-8a86-779ca8a6cfd2.png?rdr=true" width="26" height="26" border="0" alt="Sportsman's Outdoor Superstore Twitter" />
+                                                                           </a>
+                                                                      </td>
+                                                                      <td class="img" width="40" style="font-size:12px; text-align:left;">
+                                                                           <a href="https://www.youtube.com/user/SportsmansSuperstore?sub_confirmation=1" target="_blank">
+                                                                           <img src="https://files.constantcontact.com/7cc179c3301/a404fa71-0d22-431f-8472-1358e701ba04.png?rdr=true" width="26" height="26" border="0" alt="Sportsman's Outdoor Superstore YouTube Channel" />
+                                                                           </a>
+                                                                      </td>
+                                                                      <td class="img" width="40" style="font-size:12px; text-align:left;">
+                                                                           <a href="https://www.instagram.com/sportsmansoutdoorsuperstore/" target="_blank">
+                                                                           <img src="https://files.constantcontact.com/7cc179c3301/56e57609-c86d-4094-a7e6-1d71811beca6.png?rdr=true" width="26" height="26" border="0" alt="Sportsman's Outdoor Superstore Instagram" />
+                                                                           </a>
+                                                                      </td>
+                                                                 </tr>
+                                                            </table>
                                                        </td>
                                                   </tr>
                                              </table>
                                         </td>
                                    </tr>
                               </table>
-                              <!-- End Main Feature --></xmp></code></pre>`;
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <tr>
+                                        <td class="text-footer2 p30-15" style="padding: 15px 15px 50px 15px; color:#ffffff;  font-family:'Roboto', Arial, sans-serif; font-size:12px; line-height:22px; text-align:center; font-weight: 100 !important; background-color: #333333; border-right: 1px solid #f2f2f2; border-left: 1px solid #f2f2f2; border-bottom: 1px solid #f2f2f2; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                                             Please note that product prices and availability are limited time offers and are subject to change. Prices and availability were accurate at the time this newsletter was sent; however, they may differ from those you see when you visit
+                                             <a href="https://www.sportsmansoutdoorsuperstore.com?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" style="color:#ffffff;text-decoration:underline;">
+                                             <u>Sportsmansoutdoorsuperstore.com</u>
+                                             </a>
+                                             . <br>
+                                             <br>
+                                             While every effort is made to include accurate and correct images, descriptions and pricing for all products, inadvertent errors may occur. Sportsman's Outdoor Superstore reserves the right to modify or change pricing information or descriptions without notice. If you have a question about an item, please call or e-mail for more information before placing your order. <br>
+                                             <br>
+                                             <strong>
+                                             &copy; 2022 Sportsman's Outdoor Superstore. </strong> All Rights Reserved.<br />
+                                        </td>
+                                   </tr>
+                              </table>
+                              
+                              <!-- END Footer -->
+                         </td>
+                    </tr>
+               </table>
+               <!-- END Main -->
+               
+          </td>
+     </tr>
+</table>
+</body>
+</html>`; 
+              var header = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<!--[if gte mso 9]>
+        <xml>
+
+
+            96
+
+        </xml>
+        <![endif]-->
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="format-detection" content="date=no" />
+<meta name="format-detection" content="address=no" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="x-apple-disable-message-reformatting" />
+<!--[if !mso]><!-->
+<link href="https://fonts.googleapis.com/css?family=Kreon:400,700|Playfair+Display:400,400i,700,700i|Raleway:400,400i,700,700i|Roboto:400,400i,700,700i" rel="stylesheet" />
+<!--<![endif]-->
+<title>Sportsman's Outdoor Superstore</title>
+<!--[if gte mso 16]>
+        <style type="text/css">
+            sup { font-size: 100% !important; }
+.bg-white {background-color: #ffffff !important;}
+        </style>
+        <![endif]-->
+
+<style type="text/css">
+/* Linked Styles */
+body {
+     padding: 0 !important;
+     margin: 0 !important;
+     display: block !important;
+     min-width: 100% !important;
+     width: 100% !important;
+     background: #1e52bd;
+     -webkit-text-size-adjust: none
+}
+.footer-text {
+     display: none !important;
+}
+a {
+     color: #000001;
+     text-decoration: none
+}
+p {
+     padding: 0 !important;
+     margin: 0 !important
+}
+img {
+     -ms-interpolation-mode: bicubic; /* Allow smoother rendering of resized image in Internet Explorer */
+}
+.mcnPreviewText {
+     display: none !important;
+}
+.text-footer2 a {
+     color: #333333;
+}
+
+/* Mobile styles */
+@media only screen and (max-width: 640px) {
+.hidemobile {
+     display: none !important
+}
+}
+
+@media only screen and (max-device-width: 480px), only screen and (max-width: 480px) {
+.mobile-shell {
+     width: 100% !important;
+     min-width: 100% !important;
+}
+.m-center {
+     text-align: center !important;
+}
+.m-left {
+     text-align: left !important;
+     margin-right: auto !important;
+}
+.center {
+     margin: 0 auto !important;
+}
+.content2 {
+     padding: 8px 15px 12px !important;
+}
+.t-left {
+     float: left !important;
+     margin-right: 30px !important;
+}
+.t-left-2 {
+     float: left !important;
+}
+.td {
+     width: 100% !important;
+     min-width: 100% !important;
+}
+.content {
+     padding: 30px 15px !important;
+}
+.section {
+     padding: 30px 15px 0px !important;
+}
+.m-br-15 {
+     height: 15px !important;
+}
+.mpb5 {
+     padding-bottom: 5px !important;
+}
+.mpb15 {
+     padding-bottom: 15px !important;
+}
+.mpb20 {
+     padding-bottom: 20px !important;
+}
+.mpb30 {
+     padding-bottom: 30px !important;
+}
+.m-padder {
+     padding: 0px 15px !important;
+}
+.m-padder2 {
+     padding-left: 15px !important;
+     padding-right: 15px !important;
+}
+.p70 {
+     padding: 30px 0px !important;
+}
+.pt70 {
+     padding-top: 30px !important;
+}
+.p0-15 {
+     padding: 0px 15px !important;
+}
+.p15-0 {
+     padding: 15px 15px 0px;
+}
+.p30-15 {
+     padding: 30px 15px !important;
+}
+.p30-15-0 {
+     padding: 30px 15px 0px 15px !important;
+}
+.p15 {
+     padding: 15px !important;
+}
+.p0-15-30 {
+     padding: 0px 15px 30px 15px !important;
+}
+.text-footer {
+     text-align: center !important;
+}
+.m-td, .m-hide {
+     display: none !important;
+     width: 0 !important;
+     height: 0 !important;
+     font-size: 0 !important;
+     line-height: 0 !important;
+     min-height: 0 !important;
+}
+.m-block {
+     display: block !important;
+}
+.fluid-img img {
+     width: 100% !important;
+     max-width: 100% !important;
+     height: auto !important;
+}
+.column, .column-dir, .column-top, .column-empty, .column-top-30, .column-top-60, .column-empty2, .column-bottom {
+     float: left !important;
+     width: 100% !important;
+     display: block !important;
+}
+.column-empty {
+     padding-bottom: 15px !important;
+}
+.column-empty2 {
+     padding-bottom: 30px !important;
+}
+.content-spacing {
+     width: 15px !important;
+}
+}
+.emailButton:hover {
+     background-color: #b40e17 !important;
+}
+.emailButton2:hover {
+     background-color: #497892 !important;
+}
+
+@media only screen and (max-width: 480px) {
+.emailButton {
+     max-width: 600px !important;
+     width: 50% !important;
+}
+.emailButton3 {
+     max-width: 1000px !important;
+     width: 100% !important;
+}
+.emailButton {
+     max-width: 600px !important;
+     width: 50% !important;
+}
+.emailButtonContent {
+     padding-left: 15px !important;
+     padding-right: 15px !important;
+}
+.padding-m {
+     padding-top: 15px !important;
+}
+.mobileEmailText {
+     font-size: 18px !important;
+     line-height: 20px !important;
+}
+.mobileEmailParagraph {
+     font-size: 14px !important;
+     line-height: 16px !important;
+}
+.emailButton a {
+     display: block !important;
+     font-size: 12px !important;
+}
+.emailButton2 {
+     max-width: 600px !important;
+     width: 50% !important;
+}
+.emailButton2 a {
+     display: block !important;
+     font-size: 12px !important;
+}
+}
+.emailButton3 {
+     max-width: 1000px !important;
+     width: 100% !important;
+}
+</style>
+</head>
+<body class="body" style="padding:0 !important; margin:0 !important; display:block !important; min-width:100% !important; width:100% !important; background:#ffffff; -webkit-text-size-adjust:none;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+     <tr>
+          <td style="padding: 0px;">
+               <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                         <th class="column-top" width="200" style="font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:top;">
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <!--Preheader Text-->
+                                   <tr>
+                                        <td class="text-top m-center mpb5" style="display:none;font-size:1px;line-height:1px;">
+                                            ${preheader}
+                                        </td>
+                                   </tr>
+                              </table>
+                         </th>
+                    </tr>
+               </table>
+          </td>
+     </tr>
+</table>
+[[trackingImage]]
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+     <tr>
+          <td align="center" valign="top">
+               <!-- Main -->
+               <table width="650" border="0" cellspacing="0" cellpadding="0" class="mobile-shell">
+                    <tr>
+                         <td class="td" style="width:650px; min-width:650px; font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal;">
+                              <!-- Header -->
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   
+                                   <!-- Logo -->
+                                   <tr>
+                                        <td bgcolor="#f5f5f5" class="img-center" style="padding: 30px 20px; text-align:center; font-size: 12px;">
+                                             <a href="https://www.sportsmansoutdoorsuperstore.com?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" target="_blank">
+                                             <img src="https://mlsvc01-prod.s3.amazonaws.com/7cc179c3301/06c5c177-1ae4-4227-9828-ce87f1a17165.png?ver=1462564656000" width="200" border="0" alt="Sportsman's Outdoor Superstore Logo" />
+                                             </a>
+
+                                        </td>
+                                   </tr>
+                                   <!-- END Logo -->
+                                   <tr>
+                                        <td class="text-nav-white" bgcolor="#444444" style="color:#ffffff; font-family:'Roboto', Arial, sans-serif; font-size:14px; line-height:22px; text-align:center; padding:12px 0px;">
+                                             <a href="https://www.sportsmansoutdoorsuperstore.com/category.cfm/sportsman/firearms?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" target="_blank" class="link-white" style="color:#ffffff; text-decoration:none;">
+                                             <span class="link-white" style="color:#ffffff; text-decoration:none;">
+                                                  Firearms
+                                             </span>
+                                             </a>
+                                             &nbsp;&nbsp;&nbsp;
+                                             <span class="m-hide">
+                                                  &nbsp;&nbsp;&nbsp;
+                                             </span>
+                                             <a href="https://www.sportsmansoutdoorsuperstore.com/category.cfm/sportsman/firearms/combos?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" target="_blank" class="link-white" style="color:#ffffff; text-decoration:none;">
+                                             <span class="link-white m-hide" style="color:#ffffff; text-decoration:none;">
+                                                  Gun Combos&nbsp;&nbsp;&nbsp;
+                                             </span>
+                                             </a>
+                                             <span class="m-hide">
+                                                  &nbsp;&nbsp;&nbsp;
+                                             </span>
+                                             <a href="https://www.sportsmansoutdoorsuperstore.com/category.cfm/sportsman/ammunition?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" target="_blank" class="link-white" style="color:#ffffff; text-decoration:none;">
+                                             <span class="link-white" style="color:#ffffff; text-decoration:none;">
+                                                  Ammunition&nbsp;&nbsp;&nbsp;
+                                             </span>
+                                             </a>
+                                             <span class="m-hide">
+                                                  &nbsp;&nbsp;&nbsp;
+                                             </span>
+                                             <a href="https://www.sportsmansoutdoorsuperstore.com/category.cfm/sportsman/firearm-accessories?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" target="_blank" class="link-white" style="color:#ffffff; text-decoration:none;">
+                                             <span class="link-white" style="color:#ffffff; text-decoration:none;">
+                                                  Accessories&nbsp;&nbsp;&nbsp;
+                                             </span>
+                                             </a>
+                                             <span class="m-hide">
+                                                  &nbsp;&nbsp;&nbsp;
+                                             </span>
+                                             <a href="https://www.sportsmansoutdoorsuperstore.com/category.cfm/sportsman/law-enforcement?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" target="_blank" class="link-white" style="color:#ffffff; text-decoration:none;">
+                                             <span class="link-white m-hide" style="color:#ffffff; text-decoration:none;">
+                                                  First Responders&nbsp;&nbsp;&nbsp;
+                                             </span>
+
+                                             </a>
+                                        </td>
+                                   </tr>
+                              </table>
+                              <!-- END Header -->`; 
+			 
+			  var openCode = `<xmp>`;
+			  var closeCode = `</xmp>`;
+			  
+			   //the "if" statement finds the element with class "text" and clears it out 
+			  if(document.getElementsByClassName("text")){
+				  $(".text").empty();
+			  };
+			  
+			  //this line appends the header as the first section
+			  $(".text").append(openCode + header + closeCode);
+			  
+			  //this loop goes through each form by index and checks its ID to determine what each form element needs to do 
+			 for(var i = 5; i < numForms; i++){
+				 
+				 //this controls the Main Feature block
+				 if(document.forms[i].id == "main"){
+					 //Variables
+                    var style = document.forms[i].elements[0].value;
+                    var imgLink = document.forms[i].elements[1].value;
+                    var webLink = document.forms[i].elements[2].value;
+                    var price = document.forms[i].elements[3].value;
+                     //"input" grabs the value of the title from the user end
+                    var input = document.forms[i].elements[4].value;
+
+                     //"title" calls the splitTitle function and takes "input" as parameter
+                    var title = splitTitle(input);
+
+                     /*this function takes the input of the title(user end), puts it into an array, replaces any instance of "&" with "&amp;", 
+                     puts the string back together and returns it*/
+                    function splitTitle(input){
+                         var arr = input.split(" ");
+                         var newArr =[];
+                         arr.forEach((item) =>{
+                            if(item.includes("&")){
+                          newArr.push(item.replace("&", "&amp;") + " ");
+                            }else{
+                          newArr.push(item + " ");
+                            }
+                        })
+
+                         var arrLength = newArr.length;
+                         var title1 = newArr.slice(0, Math.floor(arrLength / 2));
+                         var title2 = newArr.slice(Math.floor(arrLength / 2), arrLength);
+                         return "<strong>" + title1.join(" ") + " <br> " +  title2.join(" ") + "</strong>";
+                     };
+
+                 	//"description_input" grabs the description from the user
+                 	var description_input = document.forms[i].elements[5].value;
+
+                	//"description" calls the splitTitle function and passes "description_input" as a parameter
+					var description = splitDescription(description_input);
+
+                	//same things as "splitTitle"	 
+                 	function splitDescription(description_input){
+                        let arr = description_input.split(" ");
+                        let newString ="";
+                        arr.forEach((item) =>{
+                        if(item.includes("&")){
+                          //item.replace("&", "&amp;");
+                          newString += item.replace("&", "&amp;") + " ";
+                        }else{
+                          newString += item + " ";
+                            }
+                        })
+                    return newString;
+                    };
+					var mainBlock = `<!-- Start Main Feature-->                              
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-bottom: 20px">
+     <tr>
+          <td class="fluid-img" style="font-size: 12px; border: 1px solid #e1e1e1; background-color: #f5f5f5; padding-top: 10px">
+               <a href="${webLink}?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}">
+               <!-- Main Feature Image - Transparent PNG -->
+               <img src="${imgLink}" width="100%" border="0" alt="${style}" />
+               </a>
+          </td>
+     </tr>
+     <tr>
+          <td class="mobileEmailText" style="font-size:21px; line-height:26px; text-align:center; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 5px; font-family:'Roboto', Arial, sans-serif; font-size: 21px; background-color: #f5f5f5; border-right: 1px solid #e1e1e1; border-left: 1px solid #e1e1e1; color: #222222;">
+               <a href="${webLink}?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" style="font-size:21px; line-height:24px; text-align:center; font-family:'Roboto', Arial, sans-serif;  color: #333333;">
+               ${title}
+               <br>
+               <span style="color: #a94442;">
+                   <strong>$${price}</strong></span>
+               <br>
+               </a>
+          </td>
+     </tr>
+     <tr>
+          <td class="mobileEmailParagraph" style="font-size:16px; line-height:21px; text-align:center; padding-top: 15px; padding-bottom: 10px; padding-left: 25px; padding-right: 25px; font-family:'Roboto', Arial, sans-serif; background-color: #f5f5f5; border-right: 1px solid #e1e1e1; border-left: 1px solid #e1e1e1; color: #222222;">
+
+          ${description}
+          </td>
+     </tr>
+     <tr>
+          <td style="padding-top:15px; padding-bottom: 30px; border-left: 1px solid #e1e1e1; border-right: 1px solid #e1e1e1; border-bottom: 1px solid #e1e1e1; background-color: #f5f5f5;">
+               <table align="center" border="0" cellpadding="0" cellspacing="0" class="emailButton" style="border-radius:3px; background-color:#cc101a;">
+                    <tr>
+                         <td align="center" valign="middle" class="emailButtonContent" style="padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">
+                              <a href="${webLink}?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" target="_blank" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; text-decoration:none; line-height: 18px; text-transform: uppercase;">
+                              Shop now
+                              </a>
+                         </td>
+                    </tr>
+               </table>
+          </td>
+     </tr>
+  </table>
+  <!-- End Main Feature -->`;
+					 //var mainBlock = titleLength;
 				 
 			   $(".text").append(mainBlock);
 			 
 		   };
+				 
+				 //this controls the Sub Feature block
+				 if(document.forms[i].id == "sub1"){
+					var style = document.forms[i].elements[0].value;
+					var imgLink = document.forms[i].elements[1].value;
+					var webLink = document.forms[i].elements[2].value;
+					var price = document.forms[i].elements[4].value;
+					var input = document.forms[i].elements[3].value;
+					function splitTitle(input){
+						var arr = input.split(" ");
+						 var newArr =[];
+						 arr.forEach((item) =>{
+					  		if(item.includes("&")){
+						  newArr.push(item.replace("&", "&amp;") + " ");
+					  		}else{
+						  newArr.push(item + " ");
+							}
+				  		})
+						var arrLength = newArr.length;
+						 var title1 = newArr.slice(0, Math.floor(arrLength / 2));
+						 var title2 = newArr.slice(Math.floor(arrLength / 2), arrLength);
+						 return "<strong>" + title1.join(" ") + " <br> " +  title2.join(" ") + "</strong>";
+					 };
+					var title = splitTitle(input);
+					var mainBlock = `<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" style="background-color: #ffffff !important;">
+                                   <tr>
+                                        <td align="center" class="p15-0" style="padding-top: 15px; padding-bottom: 15px; background-color: #ffffff !important;">
+                                             <table border="0" cellspacing="0" cellpadding="0" style="text-align:center;">
+                                                  <tr>
+                                                       <!--- Left Feature --->
+                                                       <th class="column-top" width="360" style="font-weight:normal; vertical-align:top;">
+                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding: 5px;">
+                                                                 <tr>
+                                                                      <td class="fluid-img" style="color:#5d5c5c;  font-family:'Roboto', Arial, sans-serif; font-size:12px; line-height:15px; text-align:left; border-right: 1px solid #f5f5f5; border-left: 1px solid #f5f5f5; border-top: 1px solid #f5f5f5; border-bottom: 1px solid #e1e1e1;">
+                                                                           <a href="${webLink}?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}">
+                                                                           <img src="${imgLink}" width="338" alt="${style}">
+                                                                           </a>
+                                                                      </td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                      <td style="color:#333333;  font-family:'Roboto', Arial, sans-serif; text-align:left; padding: 15px; background-color: #f5f5f5;">
+                                                                           <a href="${webLink}?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" style="font-size:20px; line-height:24px; color: #222222;">
+                                                                           <span style="font-size:20px; line-height:22px; color: #222222;">
+                                                                                ${title}
+                                                                           </span>
+                                                                           <br>
+                                                                           <span style="color: #a94442">
+                                                                                <strong>$${price} </strong>
+                                                                           </span>
+                                                                           </a>
+                                                                      </td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                      <td style="padding-left:10px; padding-bottom: 20px; background-color: #f5f5f5; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+                                                                           <table align="left" border="0" cellpadding="0" cellspacing="0" class="emailButton2" style="border-radius:3px; background-color:#5f92af;">
+                                                                                <tr>
+                                                                                     <td align="left" valign="left" class="emailButtonContent" style="padding-top:15px; padding-right:25px; padding-bottom:15px; padding-left:25px;">
+                                                                                          <a href="${webLink}?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" target="_blank" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:12px; text-decoration:none; line-height: 18px; text-transform: uppercase; text-align: center;">
+                                                                                          <strong>Shop Now</strong>
+                                                                                          </a>
+                                                                                     </td>
+                                                                                </tr>
+                                                                           </table>
+                                                                      </td>
+                                                                 </tr>
+                                                            </table>
+                                                       </th>`;
+				 
+			   $(".text").append(mainBlock);
+			 
 		   };
-		   });
+				 if(document.forms[i].id == "sub2"){
+					var style = document.forms[i].elements[0].value;
+					var imgLink = document.forms[i].elements[1].value;
+					var webLink = document.forms[i].elements[2].value;
+					var price = document.forms[i].elements[4].value;
+					var input = document.forms[i].elements[3].value;
+					function splitTitle(input){
+						 var arr = input.split(" ");
+						 var newArr =[];
+						 arr.forEach((item) =>{
+					  		if(item.includes("&")){
+						  newArr.push(item.replace("&", "&amp;") + " ");
+					  		}else{
+						  newArr.push(item + " ");
+							}
+				  		})
+						 
+						 var arrLength = newArr.length;
+						 var title1 = newArr.slice(0, Math.floor(arrLength / 2));
+						 var title2 = newArr.slice(Math.floor(arrLength / 2), arrLength);
+						 return "<strong>" + title1.join(" ") + " <br> " +  title2.join(" ") + "</strong>";
+					 };
+					var title = splitTitle(input);
+					var mainBlock = `<!--- Right Feature --->
+                                                       <th class="column-top" width="360" style="font-weight:normal; vertical-align:top;">
+                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding: 5px;">
+                                                                 <tr>
+                                                                      <td class="fluid-img" style="color:#5d5c5c;  font-family:'Roboto', Arial, sans-serif; font-size:12px; line-height:15px; text-align:left; border-right: 1px solid #f5f5f5; border-left: 1px solid #f5f5f5; border-top: 1px solid #f5f5f5; border-bottom: 1px solid #e1e1e1;">
+                                                                           <a href="${webLink}?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}">
+                                                                           <img src="${imgLink}" width="338" alt="${style}">
+                                                                           </a>
+                                                                      </td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                      <td style="color:#333333;  font-family:'Roboto', Arial, sans-serif; text-align:left; padding: 15px; background-color: #f5f5f5;">
+                                                                           <a href="${webLink}?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" style="font-size:20px; line-height:24px; color: #222222;">
+                                                                           <span style="font-size:20px; line-height:22px; color: #222222;">
+                                                                                ${title}
+                                                                             </span>
+                                                                           <br>
+                                                                           <span style="color: #a94442">
+                                                                              <strong>${price} </strong>
+                                                                           </span>
+                                                                           </a>
+                                                                      </td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                      <td style="padding-left:10px; padding-bottom: 20px; background-color: #f5f5f5; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+                                                                           <table align="left" border="0" cellpadding="0" cellspacing="0" class="emailButton2" style="border-radius:3px; background-color:#5f92af;">
+                                                                                <tr>
+                                                                                     <td align="left" valign="left" class="emailButtonContent" style="padding-top:15px; padding-right:25px; padding-bottom:15px; padding-left:25px;">
+                                                                                          <a href="${webLink}?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}" target="_blank" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:12px; text-decoration:none; line-height: 18px; text-transform: uppercase; text-align: center;">
+                                                                                          <strong>Shop Now</strong>
+                                                                                          </a>
+                                                                                     </td>
+                                                                                </tr>
+                                                                           </table>
+                                                                      </td>
+                                                                 </tr>
+                                                            </table>
+                                                       </th>
+                                                  </tr>
+                                             </table>
+                                        </td>
+                                   </tr>
+                              </table>`;
+				 
+			   $(".text").append(mainBlock);
+			 
+		   };
+				 
+				 //this controls the Banner block
+				 if(document.forms[i].id == "banner"){
+					 
+					var style = document.forms[i].elements[0].value;
+					var imgLink = document.forms[i].elements[1].value;
+					var webLink = document.forms[i].elements[2].value;
+					var mainBlock = `<!-- Start Main Feature-->
+                              
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-bottom:20px; padding-top: 0px;">
+                                   <tr>
+                                        <td class="fluid-img" style="font-size: 12px; border: 0px solid #e1e1e1; background-color: #f5f5f5; padding-bottom:0px; border: 0px solid #f5f5f5;">
+                                             <a href="${webLink}?utm_source=${trackingCode}&utm_medium=email&utm_campaign=${trackingCode}">
+                                             <!-- Main Feature Image - Transparent PNG -->
+                                             <img width="100%" src="${imgLink}" alt="${style}" />
+                                             </a>
+                                        </td>
+                                   </tr>
+                                  </table>
+                              <!-- End Main Feature -->`;
+				 
+			   $(".text").append(mainBlock);
+			 
+		   };
+		   
+			 
+		   };
+			  $(".text").append(openCode + footer + closeCode);
+			
+			  
+			  //var preview = document.getElementsByClassName("text").value;
+			  document.getElementById("viewer").srcdoc = header + footer; 
+		  });
 	  });
 	  //Allows the accordion body to collapse into the "h3" tags
   $( function() {
@@ -103,6 +749,7 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 			 $(this).parent().remove();
 		 });
 	 });
+
 	 
 </script>
 	
@@ -111,7 +758,7 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 	
 <!--Preheader Input-->
 	<h4>Preheader Text</h4>
-	<textarea id="preheader-text" style="width:38%" placeholder="Insert Preheader Here">Example Text</textarea><br><br>
+	<textarea id="preheader_text" style="width:38%" placeholder="Insert Preheader Here">Example Text</textarea><br><br>
 	
 <!-- Buttons for inserting code accordions -->
 	
@@ -128,7 +775,7 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 	<br><br>
 <!--Start of Accordion Block-->
 	
-<div id="accordion" style="display: inline-block; background-color:#DCDCDC; padding: 10px 5px; min-width: 640px">
+<div id="accordion" style="display: inline-block; float: left; background-color:#DCDCDC; padding: 10px 5px; min-width: 35%">
 	
 <!--Main Feature Accordion-->
 	
@@ -155,11 +802,15 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 				  </div>
 					<div class="form-example">
 					<label for="price">Price: </label>
-					<input type="text" name="main_price" id="main_price" required>
+					<input type="number" name="main_price" id="main_price" min="0" required>
 				  </div>
 					<div class="form-example">
-					<label for="description">Description: </label>
-					<input type="text" name="main_description" id="main_description" required>
+		  				<label for="title">Title: </label>
+		  				<input type="text" name="sub_title1" id="sub_title1" maxlength="100" required>
+					</div>
+					<div class="form-example">
+					<label for="description">Description: </label><br>
+					<textarea name="main_description" id="main_description" rows="4" cols="70" placeholder="Insert Description Here"></textarea>
 				  </div>
 				</form>
  			</div>
@@ -177,7 +828,7 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 	  
 <!--Sub Feature 1 Form-->
     <div class="form-input ui-accordion-content" style="display:inline-block;">
-    <form action="" method="get" class="sub1">
+    <form action="" method="get" id="sub1">
       <div class="form-example">
         <label for="style">Style: </label>
         <input type="text" name="sub_style1" id="sub_style1" required>
@@ -191,8 +842,12 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
         <input type="text" name="sub_web_link1" id="sub_web_link1" required>
       </div>
 		<div class="form-example">
+		  <label for="title">Title: </label>
+		  <input type="text" name="sub_title1" id="sub_title1" maxlength="60" required>
+		</div>
+		<div class="form-example">
 		  <label for="price">Price: </label>
-		  <input type="text" name="sub_price1" id="sub_price1" required>
+		  <input type="number" name="sub_price1" id="sub_price1" required>
 		</div>
 	  </form>
   </div>
@@ -200,7 +855,7 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 <!--Sub Feature 2 Form -->
 				
   <div class="form-input ui-accordion-animate" style="display: inline-block; padding-left: 20px;">
-    <form action="" method="get" class="sub2" >
+    <form action="" method="get" id="sub2" >
       <div class="form-example">
         <label for="style">Style: </label>
         <input type="text" name="sub_style2" id="sub_style2" required>
@@ -214,8 +869,12 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
         <input type="text" name="sub_web_link2" id="sub_web_link2" required>
       </div>
 		<div class="form-example">
+		  <label for="title">Title: </label>
+		  <input type="text" name="sub_title2" id="sub_title2" maxlength="60" required>
+		</div>
+		<div class="form-example">
 		  <label for="price">Price: </label>
-		  <input type="text" name="sub_price2" id="sub_price2" required>
+		  <input type="number" name="sub_price2" id="sub_price2" required>
 		</div>
 	  </form>
   </div>
@@ -233,7 +892,7 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
     <!--Banner Form-->
 	  
     <div class="form-input">
-    <form action="" method="get" class="banner">
+    <form action="" method="get" id="banner">
       <div class="form-example">
         <label for="style">Style: </label>
         <input type="text" name="banner_style" id="banner_style" required>
@@ -246,10 +905,6 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
         <label for="link">Web Link: </label>
         <input type="text" name="banner_web_link" id="banner_web_link" required>
       </div>
-		<div class="form-example">
-		  <label for="price">Price: </label>
-		  <input type="text" name="banner_price" id="banner_price" required>
-		</div>
 	  </form>
   </div>
   </div>
@@ -271,12 +926,17 @@ The Citadel BOSS-25 shotgun (based on the popular AR platform) is truly a versat
 <!--End of Accordion-->
 
 <!-- HTML Output -->
+		<div id="tabs" style="display: block; float: right; width: 50%; height: 600px;  border-color: black; border: 2px solid black; background-color: yellow; margin-right: 30px;">
 	
-	<div id="form-output" style="display: inline-block; float: right; width: 50%; min-height: 200px;  border-color: black; border: 2px solid black; background-color:#E4DFDF; margin-right: 30px">
-		
-		
-		<p class="text"></p>
-	</div> 
+			 <iframe srcdoc="" id="viewer" height="100%" width="100%" name="emailPreviewer"></iframe>
+		</div>
+	
+	<div id="tabs" style="display: inline-block; float: right; width: 50%; height: 600px;  border-color: black; border: 2px solid black; background-color:#E4DFDF; margin-right: 30px; overflow: scroll;">
+	
+			<pre><code class="text"></code></pre>
+		</div>
+
+	
  
 </body>
 </html>
