@@ -22,3 +22,8 @@ $("#text").html('').append(mainBlock);
 
 //more info about .empty()  https://api.jquery.com/empty/
 ---------------------------------------------------------------------------------------------------------------------------------
+112522 --- To "scan" an email and "reverse engineer" it for the values
+  *have the scan look for the commented out section <!---...--> and then scan how many <a> tags are in it. If more than 1, its a main feature, else its a banner.
+  *if the block contains <!-- Left -->, then its a product block
+  *to find the links, have it find the first <a> tag and then use delimiters - one with double quotes to get the link and then the other one with ? to find
+  *rue link and tracking code
