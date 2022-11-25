@@ -7,8 +7,7 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  <script src="/path/to/jquery.min.js"></script>
-  <script src="/path/to/savestorage.js"></script>
+
 		<style>
 	xmp {
  white-space: pre-wrap;       /* css-3 */
@@ -52,7 +51,7 @@
 				  })
 				  return newString;
 			  };
-              var footer = `<!-- Footer -->
+			  var footer = `<!-- Footer -->
                               <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#333333">
                                    <tr>
                                         <td class="p30-15-0" bgcolor="#333333" style="padding: 40px 30px 0px 30px; font-weight: 400 !important; border-right: 1px solid #f2f2f2; border-left: 1px solid #f2f2f2;">
@@ -117,7 +116,7 @@
 </table>
 </body>
 </html>`; 
-              var header = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  var header = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
 <!--[if gte mso 9]>
@@ -441,6 +440,7 @@ img {
                                    </tr>
                               </table>
                               <!-- END Header -->`; 
+			  
 			 
 			  var openCode = `<xmp>`;
 			  var closeCode = `</xmp>`;
@@ -448,13 +448,19 @@ img {
 			   //the "if" statement finds the element with class "text" and clears it out 
 			  if(document.getElementsByClassName("text")){
 				  $(".text").empty();
+				  
+				  
+				  
 			  };
 			  
 			  //this line appends the header as the first section
 			  $(".text").append(openCode + header + closeCode);
+			 
+			  
 			  
 			  //this loop goes through each form by index and checks its ID to determine what each form element needs to do 
-			 for(var i = 5; i < numForms; i++){
+			  
+			for(var i = 5; i < numForms; i++){
 				 
 				 //this controls the Main Feature block
 				 if(document.forms[i].id == "main"){
@@ -462,9 +468,23 @@ img {
                     var style = document.forms[i].elements[0].value;
                     var imgLink = document.forms[i].elements[1].value;
                     var webLink = document.forms[i].elements[2].value;
-                    var price = document.forms[i].elements[3].value;
+					var beforePrice = document.forms[i].elements[3].value;
+                    var price = document.forms[i].elements[4].value;
+					var afterPrice = document.forms[i].elements[5].value;
+					var couponPrice = document.forms[i].elements[6].value;
+					var afterPriceInput = dropDown(afterPrice);
+					function dropDown(afterPrice){
+						 var result = "";
+						 if(afterPrice.includes("Coupon")){
+							 result = afterPrice + " " + couponPrice.toUpperCase();
+						 }else if(afterPrice.includes("MSRP")){
+							 result = "<span style='text-decoration: line-through; color: #777777;'>" + couponPrice + "</span>";
+						 }
+						 return result;
+					 };
+									 
                      //"input" grabs the value of the title from the user end
-                    var input = document.forms[i].elements[4].value;
+                    var input = document.forms[i].elements[7].value;
 
                      //"title" calls the splitTitle function and takes "input" as parameter
                     var title = splitTitle(input);
@@ -476,7 +496,7 @@ img {
                          var newArr =[];
                          arr.forEach((item) =>{
                             if(item.includes("&")){
-                          newArr.push(item.replace("&", "&amp;") + " ");
+                          newArr.push(item.replace("&", "&amp;") + "");
                             }else{
                           newArr.push(item + " ");
                             }
@@ -489,7 +509,7 @@ img {
                      };
 
                  	//"description_input" grabs the description from the user
-                 	var description_input = document.forms[i].elements[5].value;
+                 	var description_input = document.forms[i].elements[8].value;
 
                 	//"description" calls the splitTitle function and passes "description_input" as a parameter
 					var description = splitDescription(description_input);
@@ -501,13 +521,15 @@ img {
                         arr.forEach((item) =>{
                         if(item.includes("&")){
                           //item.replace("&", "&amp;");
-                          newString += item.replace("&", "&amp;") + " ";
+                          newString += item.replace("&", "&amp;") + "";
                         }else{
                           newString += item + " ";
                             }
                         })
                     return newString;
-                    };
+                    };	
+					
+					
 					var mainBlock = `<!-- Start Main Feature-->                              
   <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-bottom: 20px">
      <tr>
@@ -524,7 +546,7 @@ img {
                ${title}
                <br>
                <span style="color: #a94442;">
-                   <strong>$${price}</strong></span>
+                   ${beforePrice}<strong>$${price}</strong>${afterPriceInput}</span>
                <br>
                </a>
           </td>
@@ -552,8 +574,9 @@ img {
   <!-- End Main Feature -->`;
 					 //var mainBlock = titleLength;
 				 
-			   $(".text").append(mainBlock);
-			 
+			   $(".text").append(openCode + mainBlock);					 	
+				
+					 
 		   };
 				 
 				 //this controls the Sub Feature block
@@ -568,7 +591,7 @@ img {
 						 var newArr =[];
 						 arr.forEach((item) =>{
 					  		if(item.includes("&")){
-						  newArr.push(item.replace("&", "&amp;") + " ");
+						  newArr.push(item.replace("&", "&amp;") + "");
 					  		}else{
 						  newArr.push(item + " ");
 							}
@@ -623,10 +646,11 @@ img {
                                                             </table>
                                                        </th>`;
 				 
-			   $(".text").append(mainBlock);
+			   $(".text").append(openCode + mainBlock);
 			 
 		   };
-				 if(document.forms[i].id == "sub2"){
+				 
+				if(document.forms[i].id == "sub2"){
 					var style = document.forms[i].elements[0].value;
 					var imgLink = document.forms[i].elements[1].value;
 					var webLink = document.forms[i].elements[2].value;
@@ -637,7 +661,7 @@ img {
 						 var newArr =[];
 						 arr.forEach((item) =>{
 					  		if(item.includes("&")){
-						  newArr.push(item.replace("&", "&amp;") + " ");
+						  newArr.push(item.replace("&", "&amp;") + "");
 					  		}else{
 						  newArr.push(item + " ");
 							}
@@ -693,7 +717,7 @@ img {
                                    </tr>
                               </table>`;
 				 
-			   $(".text").append(mainBlock);
+			   $(".text").append(openCode + mainBlock);
 			 
 		   };
 				 
@@ -717,17 +741,37 @@ img {
                                   </table>
                               <!-- End Main Feature -->`;
 				 
-			   $(".text").append(mainBlock);
+			   $(".text").append(openCode + mainBlock);
+			   
+			   //$(".text").append(openCode + mainBlock);
 			 
 		   };
 		   
-			 
-		   };
-			  $(".text").append(openCode + footer + closeCode);
-			
 			  
-			  //var preview = document.getElementsByClassName("text").value;
-			  document.getElementById("viewer").srcdoc = header + footer; 
+		   };
+								
+			  
+			  //have each elelemnt add their info to the email variable
+			  
+			  //this line appends the footer as the last section
+			 $(".text").append(openCode + footer + closeCode);
+			  
+			 	
+			  
+			  //the belowcomments  does not work
+			  
+			  //var preview = document.getElementById('hidden').value;
+			  //$("#viewer").attr("srcdoc", document.getElementById("hidden").value);
+			  
+			 //var email = document.getElementsByClassName("text").value;
+			 // var frameSRC = `<iframe id="frame" srcdoc='${header}${email}${footer}' height="100%" width="100%" name="emailPreviewer"></iframe>`;
+			  //$("#viewer").attr("srcdoc", header + footer);
+			
+			  //Below is for the preview window (not functioning). Preview div is commented out
+			 /* var preview = $("pre, code, xmp").detach(document.getElementsByClassName("text").value);
+			  $("#viewer").attr("srcdoc", preview);
+			  //document.getElementById("viewer").srcdoc; */
+			   //var frameSRC = document.getElementById("viewer").srcdoc;
 		  });
 	  });
 	  //Allows the accordion body to collapse into the "h3" tags
@@ -801,8 +845,31 @@ img {
 					<input type="text" name="main_web_link" id="main_web_link" required>
 				  </div>
 					<div class="form-example">
+					<label for="price">Before Price </label>
+					<select id="mainBeforePrice">
+                      <option value=""></option>
+                      <option value="Starting at ">Starting at </option>
+                      <option value="Only ">Only</option>
+                  </select>
+				  </div>
+					<div class="form-example">
 					<label for="price">Price: </label>
 					<input type="number" name="main_price" id="main_price" min="0" required>
+				  </div>
+					<div class="form-example">
+					<label for="afterPrice">After Price </label>
+					<select id="mainAfterPrice">
+                      <option value=""></option>
+                      <option value="After Rebate">After Rebate</option>
+                      <option value="with Coupon">with Coupon</option>
+					  <option value="Limited Time Deal">Limited Time Deal</option>
+					<option value="MSRP">MSRP</option>
+					  <option value="/Box">/Box</option>
+                  </select>
+				  </div>					
+					<div class="form-example">
+					<label for="coupon_price">Coupon/MSRP: </label>
+					<input type="number" name="main_price" id="main_price" min="0">
 				  </div>
 					<div class="form-example">
 		  				<label for="title">Title: </label>
@@ -926,10 +993,10 @@ img {
 <!--End of Accordion-->
 
 <!-- HTML Output -->
-		<div id="tabs" style="display: block; float: right; width: 50%; height: 600px;  border-color: black; border: 2px solid black; background-color: yellow; margin-right: 30px;">
-	
-			 <iframe srcdoc="" id="viewer" height="100%" width="100%" name="emailPreviewer"></iframe>
-		</div>
+		<!--<div style="display: block; float: right; width: 50%; height: 600px;  border-color: black; border: 2px solid black; background-color: yellow; margin-right: 30px;">
+			<iframe id="viewer" height="100%" width="100%" srcdoc="" seamless sandbox="allow-same-origin"></iframe>
+			
+	</div>-->
 	
 	<div id="tabs" style="display: inline-block; float: right; width: 50%; height: 600px;  border-color: black; border: 2px solid black; background-color:#E4DFDF; margin-right: 30px; overflow: scroll;">
 	
