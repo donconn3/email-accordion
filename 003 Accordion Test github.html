@@ -447,17 +447,12 @@ img {
 			  
 			   //the "if" statement finds the element with class "text" and clears it out 
 			  if(document.getElementsByClassName("text")){
-				  $(".text").empty();
-				  
-				  
-				  
+				  $(".text").empty();  
 			  };
 			  
 			  //this line appends the header as the first section
 			  $(".text").append(openCode + header + closeCode);
 			 
-			  
-			  
 			  //this loop goes through each form by index and checks its ID to determine what each form element needs to do 
 			  
 			for(var i = 5; i < numForms; i++){
@@ -474,11 +469,11 @@ img {
 					var couponPrice = document.forms[i].elements[6].value;
 					var afterPriceInput = dropDown(afterPrice);
 					function dropDown(afterPrice){
-						 var result = "";
+						 var result = afterPrice;
 						 if(afterPrice.includes("Coupon")){
 							 result = afterPrice + " " + couponPrice.toUpperCase();
 						 }else if(afterPrice.includes("MSRP")){
-							 result = "<span style='text-decoration: line-through; color: #777777;'>" + couponPrice + "</span>";
+							 result = "<span style='text-decoration: line-through; color: #777777;'>$" + couponPrice + "</span>";
 						 }
 						 return result;
 					 };
@@ -584,7 +579,20 @@ img {
 					var style = document.forms[i].elements[0].value;
 					var imgLink = document.forms[i].elements[1].value;
 					var webLink = document.forms[i].elements[2].value;
-					var price = document.forms[i].elements[4].value;
+					 var beforePrice = document.forms[i].elements[4].value;
+					var price = document.forms[i].elements[5].value;
+					 var afterPrice = document.forms[i].elements[6].value;
+					var couponPrice = document.forms[i].elements[7].value;
+					var afterPriceInput = dropDown(afterPrice);
+					function dropDown(afterPrice){
+						 var result = afterPrice;
+						 if(afterPrice.includes("Coupon")){
+							 result = afterPrice + " " + couponPrice.toUpperCase();
+						 }else if(afterPrice.includes("MSRP")){
+							 result = "<span style='text-decoration: line-through; color: #777777;'>$" + couponPrice + "</span>";
+						 }
+						 return result;
+					 };
 					var input = document.forms[i].elements[3].value;
 					function splitTitle(input){
 						var arr = input.split(" ");
@@ -625,7 +633,7 @@ img {
                                                                            </span>
                                                                            <br>
                                                                            <span style="color: #a94442">
-                                                                                <strong>$${price} </strong>
+                                                                                ${beforePrice}<strong>$${price} </strong>${afterPriceInput}
                                                                            </span>
                                                                            </a>
                                                                       </td>
@@ -654,7 +662,20 @@ img {
 					var style = document.forms[i].elements[0].value;
 					var imgLink = document.forms[i].elements[1].value;
 					var webLink = document.forms[i].elements[2].value;
-					var price = document.forms[i].elements[4].value;
+					 var beforePrice = document.forms[i].elements[4].value;
+					var price = document.forms[i].elements[5].value;
+					 var afterPrice = document.forms[i].elements[6].value;
+					var couponPrice = document.forms[i].elements[7].value;
+					var afterPriceInput = dropDown(afterPrice);
+					function dropDown(afterPrice){
+						 var result = afterPrice;
+						 if(afterPrice.includes("Coupon")){
+							 result = afterPrice + " " + couponPrice.toUpperCase();
+						 }else if(afterPrice.includes("MSRP")){
+							 result = "<span style='text-decoration: line-through; color: #777777;'>$" + couponPrice + "</span>";
+						 }
+						 return result;
+					 };
 					var input = document.forms[i].elements[3].value;
 					function splitTitle(input){
 						 var arr = input.split(" ");
@@ -691,7 +712,7 @@ img {
                                                                              </span>
                                                                            <br>
                                                                            <span style="color: #a94442">
-                                                                              <strong>${price} </strong>
+                                                                              ${beforePrice}<strong>$${price} </strong>${afterPriceInput}
                                                                            </span>
                                                                            </a>
                                                                       </td>
@@ -802,7 +823,7 @@ img {
 	
 <!--Preheader Input-->
 	<h4>Preheader Text</h4>
-	<textarea id="preheader_text" style="width:38%" placeholder="Insert Preheader Here">Example Text</textarea><br><br>
+	<textarea id="preheader_text" style="width:38%" placeholder="Insert Preheader Here"></textarea><br><br>
 	
 <!-- Buttons for inserting code accordions -->
 	
@@ -860,16 +881,16 @@ img {
 					<label for="afterPrice">After Price </label>
 					<select id="mainAfterPrice">
                       <option value=""></option>
-                      <option value="After Rebate">After Rebate</option>
-                      <option value="with Coupon">with Coupon</option>
-					  <option value="Limited Time Deal">Limited Time Deal</option>
+                      <option value="After Rebate"> After Rebate</option>
+                      <option value="with Coupon"> with Coupon</option>
+					  <option value="Limited Time Deal"> Limited Time Deal</option>
 					<option value="MSRP">MSRP</option>
 					  <option value="/Box">/Box</option>
                   </select>
 				  </div>					
 					<div class="form-example">
 					<label for="coupon_price">Coupon/MSRP: </label>
-					<input type="number" name="main_price" id="main_price" min="0">
+					<input type="number" name="main_price" id="main_coupon" min="0">
 				  </div>
 					<div class="form-example">
 		  				<label for="title">Title: </label>
@@ -913,9 +934,32 @@ img {
 		  <input type="text" name="sub_title1" id="sub_title1" maxlength="60" required>
 		</div>
 		<div class="form-example">
+					<label for="price">Before Price </label>
+					<select id="sub1BeforePrice">
+                      <option value=""></option>
+                      <option value="Starting at ">Starting at </option>
+                      <option value="Only ">Only</option>
+                  </select>
+				  </div>
+		<div class="form-example">
 		  <label for="price">Price: </label>
 		  <input type="number" name="sub_price1" id="sub_price1" required>
 		</div>
+		<div class="form-example">
+					<label for="afterPrice">After Price </label>
+					<select id="sub1AfterPrice">
+                      <option value=""></option>
+                      <option value=" After Rebate">After Rebate</option>
+                      <option value=" with Coupon">with Coupon</option>
+					  <option value=" Limited Time Deal">Limited Time Deal</option>
+					<option value="MSRP">MSRP</option>
+					  <option value="/Box">/Box</option>
+                  </select>
+				  </div>					
+					<div class="form-example">
+					<label for="coupon_price">Coupon/MSRP: </label>
+					<input type="number" name="sub1_coupon" id="sub1_coupon" min="0">
+				  </div>
 	  </form>
   </div>
 				
@@ -940,9 +984,32 @@ img {
 		  <input type="text" name="sub_title2" id="sub_title2" maxlength="60" required>
 		</div>
 		<div class="form-example">
+					<label for="price">Before Price </label>
+					<select id="sub2BeforePrice">
+                      <option value=""></option>
+                      <option value="Starting at ">Starting at </option>
+                      <option value="Only ">Only</option>
+                  </select>
+				  </div>
+		<div class="form-example">
 		  <label for="price">Price: </label>
 		  <input type="number" name="sub_price2" id="sub_price2" required>
 		</div>
+		<div class="form-example">
+					<label for="afterPrice">After Price </label>
+					<select id="sub2AfterPrice">
+                      <option value=""></option>
+                      <option value=" After Rebate">After Rebate</option>
+                      <option value=" with Coupon">with Coupon</option>
+					  <option value=" Limited Time Deal">Limited Time Deal</option>
+					<option value="MSRP">MSRP</option>
+					  <option value="/Box">/Box</option>
+                  </select>
+				  </div>					
+					<div class="form-example">
+					<label for="coupon_price">Coupon/MSRP: </label>
+					<input type="number" name="sub2_coupon" id="sub2_coupon" min="0">
+				  </div>
 	  </form>
   </div>
   </div>
@@ -998,7 +1065,7 @@ img {
 			
 	</div>-->
 	
-	<div id="tabs" style="display: inline-block; float: right; width: 50%; height: 600px;  border-color: black; border: 2px solid black; background-color:#E4DFDF; margin-right: 30px; overflow: scroll;">
+	<div id="tabs" style="display: block; float: right; width: 50%; height: 600px;  border-color: black; border: 2px solid black; background-color:#E4DFDF; margin-right: 30px; overflow: scroll;">
 	
 			<pre><code class="text"></code></pre>
 		</div>
