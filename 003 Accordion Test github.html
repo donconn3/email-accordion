@@ -442,8 +442,9 @@ img {
                               <!-- END Header -->`; 
 			  
 			 
-			  var openCode = `<xmp>`;
+			  var openCode = `<xmp id="email_text">`;
 			  var closeCode = `</xmp>`;
+			  var iframe = document.getElementById("frame");
 			  
 			   //the "if" statement finds the element with class "text" and clears it out 
 			  if(document.getElementsByClassName("text")){
@@ -777,6 +778,21 @@ img {
 			  //this line appends the footer as the last section
 			 $(".text").append(openCode + footer + closeCode);
 			  
+			  var source = document.getElementById("email_text").value;
+			  //var iframe = document.getElementById("frame");
+			  /*var myTimeout = setTimeout(function() {
+				  iframe.srcdoc = source;
+			  }, 2000); */
+			 
+			 /* //creates a value to represent the finished email
+			 //let source = document.getElementsByClassName("text").value;
+			  let frame = document.getElementById("frame");
+			  var documentFrame = frame.contentWindow.document;
+		
+			  //set the srcdoc of the iframe to the finished email
+			 $("#frame").append(documentFrame, source);*/
+			 
+			  
 			 	
 			  
 			  //the belowcomments  does not work
@@ -1060,10 +1076,10 @@ img {
 <!--End of Accordion-->
 
 <!-- HTML Output -->
-		<!--<div style="display: block; float: right; width: 50%; height: 600px;  border-color: black; border: 2px solid black; background-color: yellow; margin-right: 30px;">
-			<iframe id="viewer" height="100%" width="100%" srcdoc="" seamless sandbox="allow-same-origin"></iframe>
+		<div style="display: block; float: right; width: 50%; height: 600px;  border-color: black; border: 2px solid black; background-color: yellow; margin-right: 30px;">
+			<iframe id="frame" srcdoc="" height="100%" width="100%"></iframe>
 			
-	</div>-->
+	</div>
 	
 	<div id="tabs" style="display: block; float: right; width: 50%; height: 600px;  border-color: black; border: 2px solid black; background-color:#E4DFDF; margin-right: 30px; overflow: scroll;">
 	
